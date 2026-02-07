@@ -1,0 +1,43 @@
+server:
+  port: 8089
+
+spring:
+  sql:
+    init:
+      mode: always
+  application:
+    name: Java Share Hub
+
+  datasource:
+    url: jdbc:h2:./db/java_share_hub;AUTO_SERVER=TRUE
+    username: java
+    password: share
+    driver-class-name: org.h2.Driver
+
+  liquibase:
+    change-log: classpath:/db/changelog/master.yaml
+
+  mvc:
+    static-path-pattern: /static/**
+    log-request-details: true
+  freemarker:
+    expose-session-attributes: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        security: debug
+      hibernate:
+        stat: error
+        type: error
+    sql: error
+    web: error
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss} %logger{36} - %msg%n'
+  file:
+    path: logs
