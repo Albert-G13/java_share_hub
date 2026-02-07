@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004
+      author: Albert G.
+      changes:
+        - createTable:
+            tableName: files_table
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: path
+                  type: varchar(500)
+              - column:
+                  name: status
+                  type: varchar(20)
+              - column:
+                  name: download_count
+                  type: bigint
+                  defaultValueNumeric: 0
+              - column:
+                  name: download_token
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_file_to_category
+                    references: categories(id)
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_file_to_user
+                    references: users_table(id)
